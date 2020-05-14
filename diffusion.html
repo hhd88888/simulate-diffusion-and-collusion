@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <title>Diffusion</title>
+        <style>
+            body 
+            {
+                margin: 20px;
+                background-image: url("bg.jpg");
+                background-repeat: no-repeat;
+                background-position: 99% 10px;
+                background-size: 220px;
+            }
+            .myCanvas
+            {
+                background: white;
+                display: block;
+                border:10px solid  #A52A2A;
+            }
+            .controls
+            {
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+            .startbutton
+            {
+                font-size:21px;
+                width:64px;
+                height:32px;
+            }
+            .changebutton
+            {
+                font-size:21px;
+                width:100px;
+                height:32px;    
+            }
+            .setNumber
+            {
+                font-size:21px;
+                height:25px;
+                width:60px
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>气体分子模拟</h1>
+        <ol>
+        <li><a href="#part1">气体碰撞</a></li>
+        <li><a href="#part2">气体扩散</a></li>
+        </ol>
+        <hr>
+
+
+        <!--****************first_part********************-->
+        <h2 id="part1">气体碰撞</h2>
+        <p style="font-size:20px">这个项目演示了气体分子自由碰撞的过程</p>
+        <p style="color:gray;" style="font-size:18px">仅作演示<br/>不考虑分子热运动</p>
+        <ul style="font-size:20px">
+        <li>点击开始开始实验</li>
+        <li>移动滑块，可改变气体分子数目和速度</li>
+        </ul>
+        <p style="font-size:21px">
+        <input type="button" class="startbutton" value="开始" id="startButton1"><input type="button" class="startbutton" value="记录" id="recordButton">
+        <br>
+        分子个数：</font><input id="num1" class="controls" type="range" min="0" max="600" value="300"/>
+        <br>
+        速度：<input id="velocity1" class="controls" type="range" min="0.5" max="10" value="3" step="0.1"/>
+        </p>
+        <canvas id="Canvas1" class="myCanvas" width="800" height="500" ></canvas>
+        <canvas id="ptable" width="800" height="500" ></canvas>
+        <hr>
+
+
+        <!--****************second_part********************-->
+        <h2 id="part2">气体扩散</h2>
+        <p style="font-size:20px">这个项目演示了气体扩散的过程</p>
+        <ul style="font-size:20px">
+        <li>可以设置两侧温度，质量和分子个数</li>
+        <li>仅在未打开隔板状态下可进行设置</li>
+        <li>显示温度</li>
+        </ul>
+        <p style="font-size:21px">
+        <input type="button" class="changebutton" value="取出隔板" id="startButton2">
+        </p>
+        <p style="font-size:21px">
+        左侧质量：<input id="weight_l" style="font-size:21px" class="setNumber" type="number" step="1" min="1" max="10" value="5"/>
+        右侧质量：<input id="weight_r" style="font-size:21px" class="setNumber" type="number" step="1" min="1" max="10" value="5"/>
+        </p>
+        <p style="font-size:21px">
+        左侧分子个数：<input id="num_l" style="font-size:21px" class="setNumber" class="controls" type="number" step="50" min="0" max="300" value="150"/>
+        右侧分子个数：<input id="num_r"  style="font-size:21px" class="setNumber" class="controls" type="number" step="50" min="0" max="300" value="150"/>
+        </p>
+        <p style="font-size:21px">
+        左侧温度：<input id="temp_l"  style="font-size:21px" class="setNumber" class="controls" type="number" step="5" min="0" max="2500" value="25"//>
+        右侧温度:<input id="temp_r"  style="font-size:21px" class="setNumber" class="controls" type="number" step="5" min="0" max="2500" value="25"//>
+        </p>
+        <canvas id="Canvas_diffusion" class="myCanvas" width="800" height="500" ></canvas>
+        <hr>
+
+        <!--****************third_part***********-->
+        <!--<h2 id="part3">弗兰克-赫兹实验</h2>
+        <p>这个项目模拟了了弗兰克赫兹实验</p>
+        <ul>
+        <li>使用按钮设定电压</li>
+        <li>统计电流</li>
+        </ul>
+        <input type="button" value="开始" id="startButton_diffusion">
+        <canvas id="Canvas3" class="myCanvas" width="800" height="500" ></canvas>
+        <hr>-->
+
+        <a href = "file:///C:/Users/hhd88/Desktop/%E7%89%A9%E7%90%86%E5%AE%9E%E9%AA%8C/HTML5%E5%85%A5%E9%97%A8/main.html" target="view_target">访问实验中心主页</a>
+
+        <script src="utils.js"></script>
+        <script src="collusion.js"></script>
+    </body>
+
+</html>
