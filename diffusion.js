@@ -127,7 +127,7 @@ function draw_line() {
     context_diffusion.save();
     context_diffusion.beginPath();
     context_diffusion.moveTo(canvas_diffusion.width / 2, 0);
-    context_diffusion.lineTo(canvas_diffusion.width / 2, canvas_diffusion.height +2);
+    context_diffusion.lineTo(canvas_diffusion.width / 2, canvas_diffusion.height + 2);
 
     if (diffusion_state) {
         context_diffusion.strokeStyle = "rgba(0, 0, 0, 0.5)";
@@ -151,18 +151,24 @@ startButton.onclick = function(e) {
         change_temp(temp_l, m1, balls_l);
         diffusion_state = false;
         startButton.value = "取出隔板";
-        temp_range_l.textContent = 25;
-        temp_range_l.value = 25;
-        temp_range_r.textContent = 25;
-        temp_range_r.value = 25;
+        temp_range_l.textContent = 50;
+        temp_range_l.value = 50;
+        temp_range_r.textContent = 50;
+        temp_range_r.value = 50;
         weight_range_l.textContent = 5;
         weight_range_l.value = 5;
         weight_range_r.textContent = 5;
         weight_range_r.value = 5;
-        num_l.textContent = 150;
-        num_l.value = 150;
-        num_r.textContent = 150;
-        num_r.value = 150;
+        num_range_l.textContent = 55;
+        num_range_l.value = 55;
+        num_range_r.textContent = 55;
+        num_range_r.value = 55;
+        m1 = Number(weight_range_l.value);
+        m2 = Number(weight_range_r.value);
+        num_l = Number(num_range_l.value);
+        num_r = Number(num_range_r.value);
+        temp_l = Number(temp_range_l.value);
+        temp_r = Number(temp_range_r.value);
 
         generateLeftBall();
         generateRightBall();
@@ -172,8 +178,8 @@ startButton.onclick = function(e) {
 function generateLeftBall() {
     balls_l = new Array();
     for (i = 0; i < num / 2; i++) {
-        speed_array = generateNormalDistribution(0, v_l/Math.sqrt(2));
-        cir = new circle(10, 10, speed_array[0], speed_array[1], radius);
+        speed_array = generateNormalDistribution(0, v_l);
+        cir = new circle(10, 10, speed_array[0] / Math.sqrt(2), speed_array[1] / Math.sqrt(2), radius);
         while (true) {
             flag = false;
             x = 5 + Math.random() * (canvas_diffusion.width / 2 - 15);
@@ -195,8 +201,8 @@ function generateLeftBall() {
 function generateRightBall() {
     balls_r = new Array();
     for (i = 0; i < num / 2; i++) {
-        speed_array = generateNormalDistribution(0, v_r/Math.sqrt(2));
-        cir = new circle(10, 10, speed_array[0], speed_array[1], radius);
+        speed_array = generateNormalDistribution(0, v_r);
+        cir = new circle(10, 10, speed_array[0] / Math.sqrt(2), speed_array[1] / Math.sqrt(2), radius);
         while (true) {
             flag = false;
             x = canvas_diffusion.width / 2 + 10 + Math.random() * (canvas_diffusion.width / 2 - 10);
@@ -459,61 +465,54 @@ function collectSpeeds() {
 function drawTbale() {
     collectSpeeds();
 
-    var chart1 = new CanvasJS.Chart("chartContainer1", {
+    var option1 = {
         title: {
-            text: "Speed Distribution(RED)"
+            text: 'Speed Distribution'
         },
-        axisY: {
-            maximum: 50,
-            interval: 10,
+        tooltip: {},
+        legend: {
+            data: ['speed']
         },
-        data: [{
-            // Change type to "doughnut", "line", "splineArea", etc.
-            type: "column",
-            dataPoints: [
-                { label: "(0,1)", y: speeds_r[0] },
-                { label: "[1,2)", y: speeds_r[1] },
-                { label: "[2,3)", y: speeds_r[2] },
-                { label: "[3,4)", y: speeds_r[3] },
-                { label: "[4,5)", y: speeds_r[4] },
-                { label: "[5,6)", y: speeds_r[5] },
-                { label: "[7,8)", y: speeds_r[6] },
-                { label: "[8,9)", y: speeds_r[7] },
-                { label: "[9,10)", y: speeds_r[8] },
-                { label: "{10,infi)", y: speeds_r[9] }
+        xAxis: {
+            data: ["[0,1)", "[1,2)", "[2,3)", "[3,4)", "[4,5)", "[5,6)", "[7,8)", "[8,9)", "[9, 10)", "[10, infi)"]
+        },
+        yAxis: {
+            max: 70
+        },
+        series: [{
+            name: 'speed',
+            type: 'bar',
+            data: [speeds_r[0], speeds_r[1], speeds_r[2], speeds_r[3], speeds_r[4], speeds_r[5], speeds_r[6], speeds_r[7],
+                speeds_r[8], speeds_r[9]
             ]
         }]
-    });
+    };
 
-    var chart2 = new CanvasJS.Chart("chartContainer2", {
+    option2 = {
         title: {
-            text: "Speed Distribution(Blue)"
-        }, 
-        axisY: {
-            maximum: 50,
-            interval: 10,
+            text: 'Speed Distribution'
         },
-        data: [{
-            // Change type to "doughnut", "line", "splineArea", etc.
-            type: "column",
-            dataPoints: [
-                { label: "(0,1)", y: speeds_b[0] },
-                { label: "[1,2)", y: speeds_b[1] },
-                { label: "[2,3)", y: speeds_b[2] },
-                { label: "[3,4)", y: speeds_b[3] },
-                { label: "[4,5)", y: speeds_b[4] },
-                { label: "[5,6)", y: speeds_b[5] },
-                { label: "[7,8)", y: speeds_b[6] },
-                { label: "[8,9)", y: speeds_b[7] },
-                { label: "[9,10)", y: speeds_b[8] },
-                { label: "{10,infi)", y: speeds_b[9] }
+        tooltip: {},
+        legend: {
+            data: ['speed']
+        },
+        xAxis: {
+            data: ["[0,1)", "[1,2)", "[2,3)", "[3,4)", "[4,5)", "[5,6)", "[7,8)", "[8,9)", "[9, 10)", "[10, infi)"]
+        },
+        yAxis: {
+            max: 70
+        },
+        series: [{
+            name: 'speed',
+            type: 'bar',
+            data: [speeds_b[0], speeds_b[1], speeds_b[2], speeds_b[3], speeds_b[4], speeds_b[5], speeds_b[6], speeds_b[7],
+                speeds_b[8], speeds_b[9]
             ]
         }]
-    });
+    };
 
-    chart1.render();
-    chart2.render();
-
+    chart1.setOption(option1);
+    chart2.setOption(option2);
 }
 
 function generateNormalDistribution(mu, sigma) {
@@ -529,62 +528,60 @@ function generateNormalDistribution(mu, sigma) {
     return speed_array;
 }
 
-var chart1 = new CanvasJS.Chart("chartContainer1", {
+var chart1 = echarts.init(document.getElementById('chartContainer1'));
+var option1 = {
     title: {
-        text: "Speed Distribution(RED)"
+        text: 'Speed Distribution'
     },
-    axisY: {
-        maximum: 50,
-        interval: 10,
+    tooltip: {},
+    legend: {
+        data: ['speed']
     },
-    data: [{
-        // Change type to "doughnut", "line", "splineArea", etc.
-        type: "column",
-        dataPoints: [
-            { label: "(0,1)", y: speeds_r[0] },
-            { label: "[1,2)", y: speeds_r[1] },
-            { label: "[2,3)", y: speeds_r[2] },
-            { label: "[3,4)", y: speeds_r[3] },
-            { label: "[4,5)", y: speeds_r[4] },
-            { label: "[5,6)", y: speeds_r[5] },
-            { label: "[7,8)", y: speeds_r[6] },
-            { label: "[8,9)", y: speeds_r[7] },
-            { label: "[9,10)", y: speeds_r[8] },
-            { label: "{10,infi)", y: speeds_r[9] }
+    xAxis: {
+        data: ["[0,1)", "[1,2)", "[2,3)", "[3,4)", "[4,5)", "[5,6)", "[7,8)", "[8,9)", "[9, 10)", "[10, infi)"]
+    },
+    yAxis: {
+        max: 70
+    },
+    series: [{
+        name: 'speed',
+        type: 'bar',
+        data: [speeds_r[0], speeds_r[1], speeds_r[2], speeds_r[3], speeds_r[4], speeds_r[5], speeds_r[6], speeds_r[7],
+            speeds_r[8], speeds_r[9]
         ]
     }]
-})
+};
 
-var chart2 = new CanvasJS.Chart("chartContainer2", {
+
+var chart2 = echarts.init(document.getElementById('chartContainer2'));
+var option2 = {
     title: {
-        text: "Speed Distribution(Blue)"
-    }, 
-    axisY: {
-        maximum: 50,
-        interval: 10,
+        text: 'Speed Distribution'
     },
-    data: [{
-        // Change type to "doughnut", "line", "splineArea", etc.
-        type: "column",
-        dataPoints: [
-            { label: "(0,1)", y: speeds_b[0] },
-            { label: "[1,2)", y: speeds_b[1] },
-            { label: "[2,3)", y: speeds_b[2] },
-            { label: "[3,4)", y: speeds_b[3] },
-            { label: "[4,5)", y: speeds_b[4] },
-            { label: "[5,6)", y: speeds_b[5] },
-            { label: "[7,8)", y: speeds_b[6] },
-            { label: "[8,9)", y: speeds_b[7] },
-            { label: "[9,10)", y: speeds_b[8] },
-            { label: "{10,infi)", y: speeds_b[9] }
+    tooltip: {},
+    legend: {
+        data: ['speed']
+    },
+    xAxis: {
+        data: ["[0,1)", "[1,2)", "[2,3)", "[3,4)", "[4,5)", "[5,6)", "[7,8)", "[8,9)", "[9, 10)", "[10, infi)"]
+    },
+    yAxis: {
+        max: 70
+    },
+    series: [{
+        name: 'speed',
+        type: 'bar',
+        data: [speeds_b[0], speeds_b[1], speeds_b[2], speeds_b[3], speeds_b[4], speeds_b[5], speeds_b[6], speeds_b[7],
+            speeds_b[8], speeds_b[9]
         ]
     }]
-})
+};
 
 //************************************* */
 
 var count = 0;
-var t = 20;
+var t = 80;
+
 function draw(currentTime) {
     context_diffusion.clearRect(0, 0, canvas_diffusion.width, canvas_diffusion.height);
     requestAnimFrame(draw);
@@ -606,9 +603,10 @@ function draw(currentTime) {
         drawTbale();
     }
 }
+
+chart1.setOption(option1);
+chart2.setOption(option2);
 generateLeftBall();
 generateRightBall();
 draw_line();
-chart1.render();
-chart2.render();
 draw();

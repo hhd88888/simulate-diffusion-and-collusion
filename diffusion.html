@@ -19,11 +19,10 @@
             }
         </style>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-        <script src="https://cdn.bootcdn.net/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="https://cdn.bootcdn.net/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+        <script src="echarts.js"></script>
         <meta charset = "UTF-8"/>
         <title>collusion&diffusion</title>
     </head>
@@ -35,15 +34,13 @@
                 <p>本项目基于弹性碰撞模型模拟了气体碰撞以及气体扩散两个现象</p>
             </div>
 
-
-            <!--****************second_part********************-->
             <div class="page-header" id="part1">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <ul class="nav nav-pills">
-                                    <li><a href="collusion.html">气体碰撞</a></li>
+                                    <li><a href="index.html">气体碰撞</a></li>
                                     <li class="active"><a href="diffusion.html">气体扩散</a></li>
                                 </ul>
                             </div>
@@ -85,8 +82,8 @@
                                 <canvas id="Canvas_diffusion" class="myCanvas" width="1100" height="500" style="border: 2px solid #0f0; margin: 0; padding: 0; resize:both;"></canvas>
                                 </div>
                                 <div>
-                                    <div id="chartContainer1" style="height: 400px; width: 45%; display: inline-block;"></div>
-                                    <div id="chartContainer2" style="height: 400px; width: 45%; display: inline-block;"></div>
+                                    <div id="chartContainer1" style="height: 400px; width: 48%; display: inline-block;"></div>
+                                    <div id="chartContainer2" style="height: 400px; width: 48%; display: inline-block;"></div>
                                 </div>
                             </div>
                         </div>
